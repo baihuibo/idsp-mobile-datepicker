@@ -12,14 +12,14 @@
             <div layout="row" layout-align="start center" ng-click="showPanel()">
                 <button type="button" flex data-toggle="dropdown" class="form-control input-sm">
                     <div layout="row" layout-align="start center">
-                        <div flex class="text-left d-text-overflow">{{startDate}}</div>
+                        <div flex class="text-left d-text-overflow">{{startDate || '请选择开始日期'}}</div>
                         <div class="caret"></div>
                     </div>
                 </button>
                 <i style="margin:5px 7px;">-</i>
                 <button type="button" flex data-toggle="dropdown" class="form-control input-sm">
                     <div layout="row" layout-align="start center">
-                        <div flex class="text-left d-text-overflow">{{endDate}}</div>
+                        <div flex class="text-left d-text-overflow">{{endDate || '请选择结束日期'}}</div>
                         <div class="caret"></div>
                     </div>
                 </button>
@@ -109,7 +109,7 @@
                     if (scope.startDate || scope.endDate) {
                         select.startDate = _createDayByDateStr(scope.startDate);
                         select.endDate = _createDayByDateStr(scope.endDate);
-                    } else if (ngModel.$viewValue) {
+                    } else if (ngModel && ngModel.$viewValue) {
                         var arr = (ngModel.$viewValue + '').split(' - ');
                         if (arr.length) {
                             select.startDate = _createDayByDateStr(arr[0]);
@@ -162,10 +162,6 @@
 
                     el.addClass('show');
                 };
-
-                $timeout(function () {
-                    scope.showPanel();
-                });
 
                 scope.hidePanel = function () {
                     scope.dates = [];
