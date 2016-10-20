@@ -1,15 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/angular-material/layouts/angular-material.layout-attributes.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="src/datepicker.css">
 </head>
-<body>
+<body ng-controller="TestCtrl as T">
 
+<mobile-datepicker ng-model="v"
+                   start-date="st"
+                   end-date="et">
+
+</mobile-datepicker>
+
+<button class="btn btn-primary">adf</button>
+
+v = {{v}} <br>
+st = {{st}} <br>
+et = {{et}} <br>
 
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="node_modules/angular/angular.min.js"></script>
 <script src="src/datepicker.js"></script>
+<script>
+    var app = angular.module('app', ['mobile.datepicker']);
+
+    app.controller('TestCtrl', function ($scope) {
+    });
+</script>
 </body>
 </html>
