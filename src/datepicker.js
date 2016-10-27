@@ -230,7 +230,7 @@
             year += 1;
             month = 1;
         }
-        let res = [];
+        var res = [];
         for (var d = 0; d < len; d++) {
             res[d] = _createDay(year, month, preFix ? preFix - d : d + 1, cls);
         }
