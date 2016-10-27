@@ -1,6 +1,6 @@
 {
   "name": "idsp-mobile-datepicker",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "移动端日期选择器",
   "main": "src/datepicker.js",
   "repository": {

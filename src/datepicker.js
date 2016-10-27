@@ -8,66 +8,7 @@
     mod.directive('mobileDatepicker', function ($timeout) {
         return {
             restrict: 'E',
-            template: `
-            <div layout="row" layout-align="start center" ng-click="showPanel()">
-                <button type="button" flex data-toggle="dropdown" class="form-control input-sm">
-                    <div layout="row" layout-align="start center">
-                        <div flex class="text-left d-text-overflow">{{startDate || '请选择开始日期'}}</div>
-                        <div class="caret"></div>
-                    </div>
-                </button>
-                <i style="margin:5px 7px;">-</i>
-                <button type="button" flex data-toggle="dropdown" class="form-control input-sm">
-                    <div layout="row" layout-align="start center">
-                        <div flex class="text-left d-text-overflow">{{endDate || '请选择结束日期'}}</div>
-                        <div class="caret"></div>
-                    </div>
-                </button>
-            </div>
-            <div class="mobile-datepicker-panel-bg" ng-click="hidePanel()"></div>
-            <div class="mobile-datepicker-panel">
-                <div class="mobile-datepicker-head" layout="row">
-                    <div flex layout="row">
-                        <a href="javascript:" class="mb-arrow" ng-click="goPrevYear()"> &lt; </a>
-                        <div flex class="text-center">{{datePanel.year}}年</div>
-                        <a href="javascript:" class="mb-arrow" ng-click="goNextYear()"> &gt; </a>
-                    </div>
-                    <div style="width:1em"></div>
-                    <div flex layout="row">
-                        <a href="javascript:" class="mb-arrow" ng-click="goPrevMonth()"> &lt; </a>
-                        <div flex class="text-center">{{datePanel.month}}月</div>
-                        <a href="javascript:" class="mb-arrow" ng-click="goNextMonth()"> &gt; </a>
-                    </div>
-                </div>
-                <div class="mobile-datepicker-body">
-                    <div class="mobile-datepicker-week text-center" layout="row">
-                       <span flex>日</span> <span flex>一</span> <span flex>二</span>
-                       <span flex>三</span> <span flex>四</span> <span flex>五</span> 
-                       <span flex>六</span>
-                    </div>
-                    <div class="mobile-datepicker-dates">
-                        <div class="mobile-datepicker-date" ng-repeat="datePanel in dates" ng-class="{
-                                x_left:datePanel.left , 
-                                x_right : datePanel.right , 
-                                in: datePanel.in
-                            }">
-                            <div ng-repeat="theDay in datePanel.days" ng-class="{
-                                    'to-day-date' : select.isToDay(theDay.time),
-                                    'start-date' : select.isStart(theDay.time),
-                                    'range-date' : select.isRange(theDay.time),
-                                    'end-date' : select.isEnd(theDay.time)
-                                }"
-                                ng-click="selectData(theDay)" class="the-date {{theDay.cls}}">{{theDay.days}}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mobile-datepicker-footer text-center">
-                    <button type="button" class="btn btn-sm btn-primary" 
-                        ng-disabled="!select.startDate || !select.endDate" ng-click="saveData()">确定</button>
-                    <button type="button" class="btn btn-sm btn-default" ng-click="hidePanel()">取消</button>
-                </div>
-            </div>
-            `,
+            template: "<div layout=\"row\" layout-align=\"start center\" ng-click=\"showPanel()\">\n        <button type=\"button\" flex data-toggle=\"dropdown\" class=\"form-control input-sm\">\n            <div layout=\"row\" layout-align=\"start center\">\n                <div flex class=\"text-left d-text-overflow\">{{startDate || '\u8BF7\u9009\u62E9\u5F00\u59CB\u65E5\u671F'}}</div>\n                <div class=\"caret\"></div>\n            </div>\n        </button>\n        <i style=\"margin:5px 7px;\">-</i>\n        <button type=\"button\" flex data-toggle=\"dropdown\" class=\"form-control input-sm\">\n            <div layout=\"row\" layout-align=\"start center\">\n                <div flex class=\"text-left d-text-overflow\">{{endDate || '\u8BF7\u9009\u62E9\u7ED3\u675F\u65E5\u671F'}}</div>\n                <div class=\"caret\"></div>\n            </div>\n        </button>\n    </div>\n    <div class=\"mobile-datepicker-panel-bg\" ng-click=\"hidePanel()\"></div>\n    <div class=\"mobile-datepicker-panel\">\n        <div class=\"mobile-datepicker-head\" layout=\"row\">\n            <div flex layout=\"row\">\n                <a href=\"javascript:\" class=\"mb-arrow\" ng-click=\"goPrevYear()\"> &lt; </a>\n                <div flex class=\"text-center\">{{datePanel.year}}\u5E74</div>\n                <a href=\"javascript:\" class=\"mb-arrow\" ng-click=\"goNextYear()\"> &gt; </a>\n            </div>\n            <div style=\"width:1em\"></div>\n            <div flex layout=\"row\">\n                <a href=\"javascript:\" class=\"mb-arrow\" ng-click=\"goPrevMonth()\"> &lt; </a>\n                <div flex class=\"text-center\">{{datePanel.month}}\u6708</div>\n                <a href=\"javascript:\" class=\"mb-arrow\" ng-click=\"goNextMonth()\"> &gt; </a>\n            </div>\n        </div>\n        <div class=\"mobile-datepicker-body\">\n            <div class=\"mobile-datepicker-week text-center\" layout=\"row\">\n               <span flex>\u65E5</span> <span flex>\u4E00</span> <span flex>\u4E8C</span>\n               <span flex>\u4E09</span> <span flex>\u56DB</span> <span flex>\u4E94</span> \n               <span flex>\u516D</span>\n            </div>\n            <div class=\"mobile-datepicker-dates\">\n                <div class=\"mobile-datepicker-date\" ng-repeat=\"datePanel in dates\" ng-class=\"{\n                        x_left:datePanel.left , \n                        x_right : datePanel.right , \n                        in: datePanel.in\n                    }\">\n                    <div ng-repeat=\"theDay in datePanel.days\" ng-class=\"{\n                            'to-day-date' : select.isToDay(theDay.time),\n                            'start-date' : select.isStart(theDay.time),\n                            'range-date' : select.isRange(theDay.time),\n                            'end-date' : select.isEnd(theDay.time) \n                        }\"\n                        ng-click=\"selectData(theDay)\" class=\"the-date {{theDay.cls}}\">{{theDay.days}}</div>\n                </div>\n            </div>\n        </div>\n        <div class=\"mobile-datepicker-footer text-center\">\n            <button type=\"button\" class=\"btn btn-sm btn-primary\" \n                ng-disabled=\"!select.startDate || !select.endDate\" ng-click=\"saveData()\">\u786E\u5B9A</button>\n            <button type=\"button\" class=\"btn btn-sm btn-default\" ng-click=\"hidePanel()\">\u53D6\u6D88</button>\n        </div>\n    </div>",
             scope: {
                 startDate: '=?',
                 endDate: '=?'
